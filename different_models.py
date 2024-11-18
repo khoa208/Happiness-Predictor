@@ -1,12 +1,13 @@
+# Import Libraries
 import pandas as pd
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import r2_score
-import numpy as np
 import pickle
 
 # Load the preprocessed data
@@ -41,28 +42,39 @@ def evaluate_model(model, X_train, X_test, y_train, y_test, model_name):
     print(f"Cross-validation score for {model_name}: {cv_score}\n")
     return model
 
-# Try Different Models
-# Model 1: Random Forest with Full Feature Set
-model_rf_full = RandomForestRegressor(random_state=42)
-evaluate_model(model_rf_full, X_train, X_test, y_train, y_test, "Random Forest (Full Feature Set)")
+# Initialize and Evaluate Different Models
+# Model 1: Linear Regression
+model_lr = LinearRegression()
+evaluate_model(model_lr, X_train, X_test, y_train, y_test, "Linear Regression")
 
-# Model 2: Random Forest with Reduced Feature Set
-model_rf_reduced = RandomForestRegressor(random_state=42)
-evaluate_model(model_rf_reduced, X_train_reduced, X_test_reduced, y_train, y_test, "Random Forest (Reduced Feature Set)")
+# Model 2: Random Forest Regressor
+model_rf = RandomForestRegressor(random_state=42)
+evaluate_model(model_rf, X_train, X_test, y_train, y_test, "Random Forest Regressor")
 
-# Model 3: Gradient Boosting with Full Feature Set
-model_gb_full = GradientBoostingRegressor(random_state=42)
-evaluate_model(model_gb_full, X_train, X_test, y_train, y_test, "Gradient Boosting (Full Feature Set)")
+# Model 3: Gradient Boosting Regressor
+model_gb = GradientBoostingRegressor(random_state=42)
+evaluate_model(model_gb, X_train, X_test, y_train, y_test, "Gradient Boosting Regressor")
 
-# Model 4: Gradient Boosting with Reduced Feature Set
-model_gb_reduced = GradientBoostingRegressor(random_state=42)
-evaluate_model(model_gb_reduced, X_train_reduced, X_test_reduced, y_train, y_test, "Gradient Boosting (Reduced Feature Set)")
+# Model 4: Support Vector Regressor
+model_svr = SVR()
+evaluate_model(model_svr, X_train, X_test, y_train, y_test, "Support Vector Regressor")
 
-# Model 5: Support Vector Regressor with Full Feature Set
-model_svr_full = SVR()
-evaluate_model(model_svr_full, X_train, X_test, y_train, y_test, "Support Vector Regressor (Full Feature Set)")
+# Model 5: K-Nearest Neighbors Regressor
+model_knn = KNeighborsRegressor(n_neighbors=5)
+evaluate_model(model_knn, X_train, X_test, y_train, y_test, "K-Nearest Neighbors Regressor")
 
-# Save the best model
-best_model = model_gb_full  # Replace this with the model that gives the best performance
-with open('best_model.model', 'wb') as file:
-    pickle.dump(best_model, file)
+# Save All Models
+models = {
+    "Linear Regression": model_lr,
+    "Random Forest Regressor": model_rf,
+    "Gradient Boosting Regressor": model_gb,
+    "Support Vector Regressor": model_svr,
+    "K-Nearest Neighbors Regressor": model_knn
+}
+
+# Save each model as a .model file
+for model_name, model in models.items():
+    filename = f"{model_name.replace(' ', '_')}.model"
+    with open(filename, 'wb') as file:
+        pickle.dump(model, file)
+        print(f"Saved {model_name} as {filename}")
