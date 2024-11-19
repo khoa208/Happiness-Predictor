@@ -16,8 +16,27 @@ def preprocess_data():
     # Handle missing values (if any)
     data_cleaned = data_cleaned.dropna()
 
-    # Split features and target
-    X = data_cleaned.drop(columns=['Happiness Score'])
+    # Combine related features
+    data_cleaned['Economic & Family Score'] = (
+        data_cleaned['Economy (GDP per Capita)'] + data_cleaned['Family']
+    )
+    data_cleaned['Well-Being'] = (
+        data_cleaned['Health (Life Expectancy)'] + data_cleaned['Freedom']
+    )
+
+    # Drop original features after combining
+    data_cleaned = data_cleaned.drop(columns=[
+        'Economy (GDP per Capita)', 
+        'Family', 
+        'Health (Life Expectancy)', 
+        'Freedom'
+    ])
+
+    # Select only the 5 features and the target
+    selected_features = ['Happiness Rank', 'Standard Error', 
+                         'Economic & Family Score', 'Well-Being', 
+                         'Dystopia Residual']
+    X = data_cleaned[selected_features]
     y = data_cleaned['Happiness Score']
 
     # Standardize features
