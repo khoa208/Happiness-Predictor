@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-import pickle, os
+import pickle,os
 
 # Load the trained model and scaler
 model = pickle.load(open('model.pkl', 'rb'))
