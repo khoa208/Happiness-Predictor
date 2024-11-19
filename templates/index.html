@@ -51,45 +51,21 @@
         required
       />
 
-      <label for="economy">Economy (GDP per Capita):</label>
+      <label for="economic-family-score">Economic & Family Score:</label>
       <input
         type="number"
         step="0.0001"
-        id="economy"
-        name="Economy (GDP per Capita)"
+        id="economic-family-score"
+        name="Economic & Family Score"
         required
       />
 
-      <label for="family">Family:</label>
-      <input type="number" step="0.0001" id="family" name="Family" required />
-
-      <label for="health">Health (Life Expectancy):</label>
+      <label for="well-being">Well-Being:</label>
       <input
         type="number"
         step="0.0001"
-        id="health"
-        name="Health (Life Expectancy)"
-        required
-      />
-
-      <label for="freedom">Freedom:</label>
-      <input type="number" step="0.0001" id="freedom" name="Freedom" required />
-
-      <label for="trust">Trust (Government Corruption):</label>
-      <input
-        type="number"
-        step="0.0001"
-        id="trust"
-        name="Trust (Government Corruption)"
-        required
-      />
-
-      <label for="generosity">Generosity:</label>
-      <input
-        type="number"
-        step="0.0001"
-        id="generosity"
-        name="Generosity"
+        id="well-being"
+        name="Well-Being"
         required
       />
 
@@ -111,13 +87,10 @@
         const data = {
           "Happiness Rank": document.getElementById("happiness-rank").value,
           "Standard Error": document.getElementById("standard-error").value,
-          "Economy (GDP per Capita)": document.getElementById("economy").value,
-          Family: document.getElementById("family").value,
-          "Health (Life Expectancy)": document.getElementById("health").value,
-          Freedom: document.getElementById("freedom").value,
-          "Trust (Government Corruption)":
-            document.getElementById("trust").value,
-          Generosity: document.getElementById("generosity").value,
+          "Economic & Family Score": document.getElementById(
+            "economic-family-score"
+          ).value,
+          "Well-Being": document.getElementById("well-being").value,
           "Dystopia Residual":
             document.getElementById("dystopia-residual").value,
         };
