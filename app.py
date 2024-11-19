@@ -21,19 +21,15 @@ def index():
 def predict():
     try:
         # Get input JSON data
-        input_data = request.json
+        data = request.json
 
         # Prepare input features
         features = [
-            input_data['Happiness Rank'],
-            input_data['Standard Error'],
-            input_data['Economy (GDP per Capita)'],
-            input_data['Family'],
-            input_data['Health (Life Expectancy)'],
-            input_data['Freedom'],
-            input_data['Trust (Government Corruption)'],
-            input_data['Generosity'],
-            input_data['Dystopia Residual']
+            float(data['Happiness Rank']),
+            float(data['Standard Error']),
+            float(data['Economic & Family Score']),
+            float(data['Well-Being']),
+            float(data['Dystopia Residual'])
         ]
 
         # Scale the input features
