@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import pickle
 
 # Load the dataset
-data = pd.read_csv('another_happiness.csv')
+data = pd.read_csv('data_happiness.csv')
 
 # Data Preprocessing
 def preprocess_data():
