@@ -1,10 +1,6 @@
 **In developing**
 
-CSUF - Fall 2024
-
-CPSC483 - Machine Learning
-
-Happiness Ranking App Project
+Happiness Score Predicting App Project
 
 KHOA DO
 
